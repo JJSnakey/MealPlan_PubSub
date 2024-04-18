@@ -1,8 +1,7 @@
 package project460eclipse;
 import javax.swing.*;
-import javax.swing.JFrame;
 
-public class GUI {
+public class GUI extends JFrame {
 	
 	JFrame gui = new JFrame();
 	

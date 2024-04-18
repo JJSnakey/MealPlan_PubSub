@@ -11,9 +11,9 @@ initialize messagebroker and GUI
 public class Main {
 
 	public static void main(String[] args) {
+		new MessageBroker();
+		new GUI();
 		
-		JFrame frame = new JFrame();
-		frame.setVisible(true);
 	}
 
 }

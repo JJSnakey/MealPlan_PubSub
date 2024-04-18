@@ -1,4 +1,6 @@
 package project460eclipse;
+import java.awt.Color;
+
 import javax.swing.*;
 
 /*
@@ -16,8 +18,27 @@ allows publisher to publish
 allows subscriber to subscribe or unsubscribe
 */
 
-public class GUI extends JFrame {
+public class GUI extends JFrame{
 	
-	JFrame gui = new JFrame();
+	//constructor, main creates a GUI
+	GUI(){
+		//window stuff
+		this.setTitle("Joshua Greer's 460 Project");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setBounds(100,100,720,720);
+		this.setLayout(null);	//necessary for JPanels
+		this.setResizable(false);
+		this.setVisible(true);
+		
+		//labels and textboxes
+		
+		
+		//buttons and function calls
+		
+		
+		//output
+				
+
+	}
 	
 }

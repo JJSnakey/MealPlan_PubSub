@@ -1,4 +1,6 @@
 package project460eclipse;
+import java.io.*;
+import java.util.ArrayList;
 
 /*
 Joshua Greer 1218576515
@@ -13,11 +15,15 @@ stop notifying subscribers when unsubscribe
 
 public class MessageBroker {
 	
-	Meal mealArray[];
+	ArrayList<Meal> meals;
+	ArrayList<Publisher> pubs;
+	ArrayList<Subscriber> subs;
 	
 	//constructor, initialize on start
 	MessageBroker(){
-		
+		meals = new ArrayList<Meal>();
+		pubs = new ArrayList<Publisher>();
+		subs = new ArrayList<Subscriber>();
 	}
 	
 	//add sub--------------------------------------------------------------------------------

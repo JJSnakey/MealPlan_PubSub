@@ -29,12 +29,16 @@ public class GUI extends JFrame implements ActionListener{
 	label tomLabel = new label("time of meal:", 10, 60);
 	label domLabel = new label("day of meal:", 10, 80);
 	
+	JButton publishButton;
+	
 	//sub side
 	label usernameLabel2 = new label("username:", 250, 0);
 	label ctoiLabel = new label("cuisine type of \ninterest:", 250, 20);
 	label dailyLabel = new label("daily:", 250, 40);
 	label weeklyLabel = new label("weekly:", 250, 60);
 
+	JButton subscribeButton;
+	
 	
 	//constructor, main creates a GUI
 	GUI(){
@@ -61,11 +65,24 @@ public class GUI extends JFrame implements ActionListener{
 
 		
 		//buttons and function calls
+		publishButton = new JButton("publish");
+		publishButton.setBounds(10,120,100,30);
+		this.add(publishButton);
 		
+		subscribeButton = new JButton("subscribe");
+		subscribeButton.setBounds(250,120,100,30);
+		this.add(subscribeButton);
 		
 		//output
 				
 
+	}
+
+//for button use later
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

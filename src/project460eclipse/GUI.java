@@ -29,14 +29,25 @@ public class GUI extends JFrame implements ActionListener{
 	label tomLabel = new label("time of meal:", 10, 60);
 	label domLabel = new label("day of meal:", 10, 80);
 	
+	textBox usernameBox = new textBox(10,0);
+	textBox ctBox = new textBox(10,20);
+	textBox mealNameBox = new textBox(10,40);
+	textBox tomBox = new textBox(10,60);
+	textBox domBox = new textBox(10,80);
+	
 	JButton publishButton;
 	
 	//sub side
 	label usernameLabel2 = new label("username:", 250, 0);
-	label ctoiLabel = new label("cuisine type of \ninterest:", 250, 20);
+	label ctoiLabel = new label("cuisine type of interest:", 250, 20);
 	label dailyLabel = new label("daily:", 250, 40);
 	label weeklyLabel = new label("weekly:", 250, 60);
 
+	textBox usernameBox2 = new textBox(310,0);
+	textBox ctoiBox = new textBox(310,20);
+	textBox dailyBox = new textBox(310,40);
+	textBox weeklyBox = new textBox(310,60);
+	
 	JButton subscribeButton;
 	
 	
@@ -45,32 +56,48 @@ public class GUI extends JFrame implements ActionListener{
 		//window stuff
 		this.setTitle("Joshua Greer's 460 Project");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setBounds(100,100,720,600);
+		this.setBounds(100,100,720,400);
 		this.setLayout(null);	//necessary for JPanels
 		this.setResizable(false);
 		this.getContentPane().setBackground(new Color(120,120,120));
 		this.setVisible(true);
 		
 		//labels and textboxes
+		
+		//pub side
 		this.add(usernameLabel);
 		this.add(ctLabel);
 		this.add(mealNameLabel);
 		this.add(tomLabel);
 		this.add(domLabel);
 		
+		this.add(usernameBox);
+		this.add(ctBox);
+		this.add(mealNameBox);
+		this.add(tomBox);
+		this.add(domBox);
+		
+		//sub side
 		this.add(usernameLabel2);
 		this.add(ctoiLabel);
 		this.add(dailyLabel);
 		this.add(weeklyLabel);
+		
+		this.add(usernameBox2);
+		this.add(ctoiBox);
+		this.add(dailyBox);
+		this.add(weeklyBox);
 
 		
 		//buttons and function calls
 		publishButton = new JButton("publish");
-		publishButton.setBounds(10,120,100,30);
+		publishButton.setBounds(10,130,100,30);
+		publishButton.addActionListener(this);
 		this.add(publishButton);
 		
 		subscribeButton = new JButton("subscribe");
-		subscribeButton.setBounds(250,120,100,30);
+		subscribeButton.setBounds(250,130,100,30);
+		subscribeButton.addActionListener(this);
 		this.add(subscribeButton);
 		
 		//output
@@ -82,7 +109,12 @@ public class GUI extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		if(e.getSource()==publishButton) {
+			System.out.println("1");
+		}
+		if(e.getSource()==subscribeButton) {
+			System.out.println("2");
+		}
 	}
 	
 }

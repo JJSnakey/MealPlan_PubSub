@@ -15,7 +15,7 @@ public class checkBox extends JCheckBox{
 	
 	//constructor
 	checkBox(int x1, int y1){
-		this.setBounds(x1, y1, 20, 20);
+		this.setBounds(x1+50, y1+18, 20, 20);
 		this.setBackground(new Color(200,200,200));
 		this.setBorder(getBorder());
 	}

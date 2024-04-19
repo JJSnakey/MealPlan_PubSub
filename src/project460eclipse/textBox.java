@@ -16,7 +16,7 @@ public class textBox extends JTextField{
 	
 	//standardize the textboxes
 	textBox(int x1, int y1){
-		this.setBounds(x1+85,y1+18,100,20);
+		this.setBounds(x1+75,y1+18,100,20);
 		this.setBackground(new Color(200,200,200));
 		this.setBorder(getBorder());
 		this.setText("");

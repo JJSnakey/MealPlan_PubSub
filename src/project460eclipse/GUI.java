@@ -24,21 +24,31 @@ allows subscriber to subscribe or unsubscribe
 public class GUI extends JFrame implements ActionListener{
 	
 	//pub side
-	label usernameLabel = new label("username:", 10, 0);
-	label ctLabel = new label("cuisine type:", 10, 20);
-	label mealNameLabel = new label("meal name:", 10, 40);
-	label tomLabel = new label("time of meal:", 10, 60);
-	label domLabel = new label("day of meal:", 10, 80);
+	label pub = new label("Publisher:", 10, 0);
 	
-	textBox usernameBox = new textBox(10,0);
-	textBox ctBox = new textBox(10,20);
-	textBox mealNameBox = new textBox(10,40);
-	textBox tomBox = new textBox(10,60);
-	textBox domBox = new textBox(10,80);
+	label usernameLabel = new label("username:", 10, 30);
+	label pubDailyLabel = new label("daily:", 10, 50);
+	label pubWeeklyLabel = new label("weekly:", 10, 70);
+	label mealNameLabel = new label("meal name:", 10, 90);
+	label ctLabel = new label("cuisine type:", 10, 110);
+	label cookTimeLabel = new label("cook time:", 10, 130);
+	label tomLabel = new label("time of meal:", 10, 150);
+	label domLabel = new label("day of meal:", 10, 170);
+	
+	
+	textBox usernameBox = new textBox(10,30);
+	checkBox pubDailyBox = new checkBox(10, 50);
+	checkBox pubWeeklyBox = new checkBox(10, 70);
+	textBox mealNameBox = new textBox(10,90);
+	textBox ctBox = new textBox(10,110);
+	textBox cookTimeBox = new textBox(10,130);
+	textBox tomBox = new textBox(10,150);
+	textBox domBox = new textBox(10,170);
 	
 	JButton publishButton;
 	
 	//sub side
+	label sub = new label("Subscriber:", 250, 0);
 	label usernameLabel2 = new label("username:", 250, 0);
 	label ctoiLabel = new label("cuisine type of interest:", 250, 20);
 	label dailyLabel = new label("daily:", 250, 40);
@@ -54,8 +64,8 @@ public class GUI extends JFrame implements ActionListener{
 	JButton UnsubscribeButton;
 	
 	//other
-	label outputLabel = new label("Output displayed in terminal", 10, 180);
-	label noteLabel = new label("If buttons do not immediately appear, wave mouse around window", 10, 200);
+	label outputLabel = new label("Output displayed in terminal", 10, 240);
+	label noteLabel = new label("If buttons do not immediately appear, wave mouse around window", 10, 260);
 	
 	
 	//constructor, main creates a GUI======================================================================================
@@ -63,7 +73,7 @@ public class GUI extends JFrame implements ActionListener{
 		//window stuff
 		this.setTitle("Joshua Greer's 460 Project");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setBounds(100,100,600,300);
+		this.setBounds(100,100,600,400);
 		this.setLayout(null);	//necessary for JPanels
 		this.setResizable(false);
 		this.getContentPane().setBackground(new Color(140,140,140));
@@ -72,17 +82,25 @@ public class GUI extends JFrame implements ActionListener{
 		//labels and textboxes
 		this.add(outputLabel);
 		this.add(noteLabel);
+		this.add(pub);
+		this.add(sub);
 		
 		//pub side
 		this.add(usernameLabel);
-		this.add(ctLabel);
+		this.add(pubDailyLabel);
+		this.add(pubWeeklyLabel);
 		this.add(mealNameLabel);
+		this.add(ctLabel);
+		this.add(cookTimeLabel);
 		this.add(tomLabel);
 		this.add(domLabel);
 		
 		this.add(usernameBox);
-		this.add(ctBox);
+		this.add(pubDailyBox);
+		this.add(pubWeeklyBox);
 		this.add(mealNameBox);
+		this.add(ctBox);
+		this.add(cookTimeBox);
 		this.add(tomBox);
 		this.add(domBox);
 		
@@ -101,7 +119,7 @@ public class GUI extends JFrame implements ActionListener{
 		
 		//buttons and function calls
 		publishButton = new JButton("publish");
-		publishButton.setBounds(10,130,100,30);
+		publishButton.setBounds(10,220,100,30);
 		publishButton.addActionListener(this);
 		this.add(publishButton);
 		
@@ -124,6 +142,10 @@ public class GUI extends JFrame implements ActionListener{
 		System.out.println(mealName);
 		System.out.println(Tom);
 		System.out.println(Dom);
+		
+		//Meal meal = new Meal(username, cuisine, mealName, 15, true);
+		//MessageBroker.meals.add(meal);
+		
 	}
 	
 	public void subscribe(String username, String cuisine, boolean daily) {

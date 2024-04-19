@@ -11,18 +11,20 @@ MessageBroker object will remember all the published meals
 publishers will submit meals
 notify subscribers when the meal they search for is published
 stop notifying subscribers when unsubscribe
+
+publishers don't really need to be remembered, their ID can just be attached to the meal
 */
 
 public class MessageBroker {
 	
-	ArrayList<Meal> meals;
-	ArrayList<Publisher> pubs;
-	ArrayList<Subscriber> subs;
+	static ArrayList<Meal> meals;
+	//ArrayList<Publisher> pubs;
+	static ArrayList<Subscriber> subs;
 	
 	//constructor, initialize on start
 	MessageBroker(){
 		meals = new ArrayList<Meal>();
-		pubs = new ArrayList<Publisher>();
+		//pubs = new ArrayList<Publisher>();
 		subs = new ArrayList<Subscriber>();
 	}
 	
@@ -35,6 +37,10 @@ public class MessageBroker {
 		
 	}
 	
+	/*
+	Publishers don't really need to be remembered by the broker because they just send in messages
+	and don't need notifications back
+	
 	//add pub
 	public void attachPublisher() {
 		
@@ -43,6 +49,8 @@ public class MessageBroker {
 	public void detachPublisher() {
 		
 	}
+	*/
+	
 	
 	//function to notify subscribers--------------------------------------------------------
 	public void notifySubscribers() {

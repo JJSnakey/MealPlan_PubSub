@@ -37,23 +37,62 @@ public class MessageBroker {
 		
 	}
 	
-	/*
-	Publishers don't really need to be remembered by the broker because they just send in messages
-	and don't need notifications back
-	
-	//add pub
-	public void attachPublisher() {
-		
-	}
-	//remove pub
-	public void detachPublisher() {
-		
-	}
-	*/
-	
-	
 	//function to notify subscribers--------------------------------------------------------
 	public void notifySubscribers() {
+		
+	}
+	
+	
+	//print function bb=================================================================================================
+	public static void printMeal(Meal meal) {
+		
+		boolean flag1 = meal.daily;	//daily or weekly
+		boolean flag2 = false;		//do we have tom
+		boolean flag3 = false;		//do we have dom
+		
+		if(meal.timeOfMeal != null) {
+			flag2 = true;
+		}
+		if(meal.dayOfMeal != null) {
+			flag3 = true;
+		}
+		
+		if(flag2 == true && flag3 == true) {
+			//print with tom and dom
+			if(flag1) {
+				System.out.println("publish, " + meal.publisherName + ", dailyMeal, " + meal.mealName + ", " + meal.timeToCook + " minutes, " + meal.timeOfMeal + ", " + meal.dayOfMeal);	
+			}
+			else {
+				System.out.println("publish, " + meal.publisherName + ", weeklyMeal, " + meal.mealName + ", " + meal.timeToCook + " minutes, " + meal.timeOfMeal + ", " + meal.dayOfMeal);	
+			}
+		}
+		if(flag2 == true && flag3 == false) {
+			//print with tom
+			if(flag1) {
+				System.out.println("publish, " + meal.publisherName + ", dailyMeal, " + meal.mealName + ", " + meal.timeToCook + " minutes, " + meal.timeOfMeal);	
+			}
+			else {
+				System.out.println("publish, " + meal.publisherName + ", weeklyMeal, " + meal.mealName + ", " + meal.timeToCook + " minutes, " + meal.timeOfMeal);	
+			}
+		}
+		if(flag2 == false && flag3 == true) {
+			//print with dom
+			if(flag1) {
+				System.out.println("publish, " + meal.publisherName + ", dailyMeal, " + meal.mealName + ", " + meal.timeToCook + " minutes, " + meal.dayOfMeal);	
+			}
+			else {
+				System.out.println("publish, " + meal.publisherName + ", weeklyMeal, " + meal.mealName + ", " + meal.timeToCook + " minutes, " + meal.dayOfMeal);	
+			}
+		}
+		if(flag2 == false && flag3 == false) {
+			//print with no optionals
+			if(flag1) {
+				System.out.println("publish, " + meal.publisherName + ", dailyMeal, " + meal.mealName + ", " + meal.timeToCook + " minutes");	
+			}
+			else {
+				System.out.println("publish, " + meal.publisherName + ", weeklyMeal, " + meal.mealName + ", " + meal.timeToCook + " minutes");	
+			}
+		}
 		
 	}
 	

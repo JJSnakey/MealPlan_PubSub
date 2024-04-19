@@ -19,8 +19,6 @@ public class Meal {
 	String timeOfMeal;	//optional
 	String dayOfMeal;	//optional
 	
-	
-	
 	//constructor for easy build
 	Meal(String pubName, boolean freq, String mealName, String cuisine, int cook, String tom, String dom){
 		this.publisherName = pubName;

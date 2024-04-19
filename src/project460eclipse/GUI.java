@@ -49,23 +49,22 @@ public class GUI extends JFrame implements ActionListener{
 	
 	//sub side
 	label sub = new label("Subscriber:", 250, 0);
-	label usernameLabel2 = new label("username:", 250, 0);
-	label ctoiLabel = new label("cuisine type of interest:", 250, 20);
-	label dailyLabel = new label("daily:", 250, 40);
-	label weeklyLabel = new label("weekly:", 250, 60);
+	label usernameLabel2 = new label("username:", 250, 30);
+	label dailyLabel = new label("daily:", 250, 50);
+	label weeklyLabel = new label("weekly:", 250, 70);
+	label ctoiLabel = new label("cuisine type of interest:", 250, 90);
 
-	textBox usernameBox2 = new textBox(310,0);
-	textBox ctoiBox = new textBox(310,20);
-	
-	checkBox dailyBox = new checkBox(310, 60);
-	checkBox weeklyBox = new checkBox(310, 80);
+	textBox usernameBox2 = new textBox(250,30);
+	checkBox dailyBox = new checkBox(250, 50);
+	checkBox weeklyBox = new checkBox(250, 70);
+	textBox ctoiBox = new textBox(310,90);
 	
 	JButton subscribeButton;
 	JButton UnsubscribeButton;
 	
 	//other
-	label outputLabel = new label("Output displayed in terminal", 10, 240);
-	label noteLabel = new label("If buttons do not immediately appear, wave mouse around window", 10, 260);
+	label outputLabel = new label("Output displayed in terminal", 10, 260);
+	label noteLabel = new label("If buttons do not immediately appear, wave mouse around window", 10, 280);
 	
 	
 	//constructor, main creates a GUI======================================================================================
@@ -124,29 +123,17 @@ public class GUI extends JFrame implements ActionListener{
 		this.add(publishButton);
 		
 		subscribeButton = new JButton("subscribe");
-		subscribeButton.setBounds(250,130,100,30);
+		subscribeButton.setBounds(250,150,100,30);
 		subscribeButton.addActionListener(this);
 		this.add(subscribeButton);
 		
 		UnsubscribeButton = new JButton("unsubscribe");
-		UnsubscribeButton.setBounds(400,130,120,30);
+		UnsubscribeButton.setBounds(400,150,120,30);
 		UnsubscribeButton.addActionListener(this);
 		this.add(UnsubscribeButton);
 	}
 
 	//functions============================================================================================================
-	public void publish(String username, String cuisine, String mealName, String Tom, String Dom) {
-		System.out.println("The meal is:");
-		System.out.println(username);
-		System.out.println(cuisine);
-		System.out.println(mealName);
-		System.out.println(Tom);
-		System.out.println(Dom);
-		
-		//Meal meal = new Meal(username, cuisine, mealName, 15, true);
-		//MessageBroker.meals.add(meal);
-		
-	}
 	
 	public void subscribe(String username, String cuisine, boolean daily) {
 		System.out.println("Subcribed for:");
@@ -196,55 +183,91 @@ public class GUI extends JFrame implements ActionListener{
 			
 			//organize inputs
 			String username = usernameBox.getText();
-			String cuisineType = ctBox.getText();
+			boolean dailyPub = pubDailyBox.isSelected();
+			boolean weeklyPub = pubWeeklyBox.isSelected();
 			String mealName = mealNameBox.getText();
+			String cuisineType = ctBox.getText();
+			String cookTime = cookTimeBox.getText();
 			String tom = tomBox.getText();
 			String dom = domBox.getText();
-			boolean flag1 = true;
-			boolean flag2 = true;
-			boolean flag3 = true;
 			
-			//perform checks
+			int convertCookTime = 0;
+			boolean flag1 = true;	//necessary components
+			boolean flag2 = true;	//optional tom
+			boolean flag3 = true;	//optional dom
+			
+			//base checks
 			if(username.length() == 0) {
 				System.out.println("please enter a valid username");
 				flag1 = false;
 			}
-			if(cuisineType.length() == 0) {
-				System.out.println("please enter a valid cuisine type");
+			if(dailyPub == weeklyPub) {
+				System.out.println("please check a single box");
 				flag1 = false;
 			}
 			if(mealName.length() == 0) {
 				System.out.println("please enter a valid meal name");
 				flag1 = false;
 			}
-			
-			if(tom.length() == 0) {
-				System.out.println("please enter a valid time of meal");
+			if(cuisineType.length() == 0) {
+				System.out.println("please enter a valid cuisine type");
 				flag1 = false;
+			}
+			if(cookTime.length() <= 0) {
+				System.out.println("please enter a valid cook time in minutes");
+				flag1 = false;
+			}
+			if(cookTime.length() > 0) {
+				convertCookTime = Integer.parseInt(cookTime);
+			}
+			
+			//optional checks
+			if(tom.length() == 0) {
+				//System.out.println("please enter a valid time of meal");
+				flag2 = false;
 			}
 			if(tom.length() > 0) {
 				String[] list = {"breakfast", "Breakfast", "lunch", "Lunch", "dinner", "Dinner"};
 				flag2 = keyWordCheck(tom, list);
 				if(flag2 == false) {
-					System.out.println("please enter a valid time of meal");
+					System.out.println("invalid time of meal");
 				}
 			}
 			
 			if(dom.length() == 0) {
-				System.out.println("please enter a valid day of meal");
-				flag1 = false;
+				//System.out.println("please enter a valid day of meal");
+				flag3 = false;
 			}
 			if(dom.length() > 0) {
 				String[] list = {"sunday", "Sunday", "monday", "Monday", "tuesday", "Tuesday", "wednesday", "Wednesday", "thursday", "Thursday", "friday", "Friday", "saturday", "Saturday"};
 				flag3 = keyWordCheck(dom, list);
 				if(flag3 == false) {
-					System.out.println("please enter a valid day of meal");
+					System.out.println("invalid day of meal");
 				}
 			}
 			
 			//if checks are all good
 			if(flag1 == true && flag2 == true && flag3 == true) {
-				publish(username, cuisineType, mealName, tom, dom);
+				Meal meal = new Meal(username, dailyPub, mealName, cuisineType, convertCookTime, tom, dom);
+				MessageBroker.meals.add(meal);
+				MessageBroker.printMeal(meal);
+			}
+			//if some optional checks are missing
+			else if(flag1 == true && flag2 == true && flag3 == false) {
+				Meal meal = new Meal(username, dailyPub, mealName, cuisineType, convertCookTime, tom);
+				MessageBroker.meals.add(meal);
+				MessageBroker.printMeal(meal);
+				
+			}
+			else if(flag1 == true && flag2 == false && flag3 == true) {
+				Meal meal = new Meal(username, dailyPub, mealName, cuisineType, convertCookTime, dom);
+				MessageBroker.meals.add(meal);
+				MessageBroker.printMeal(meal);
+			}
+			else if(flag1 == true && flag2 == false && flag3 == false) {
+				Meal meal = new Meal(username, dailyPub, mealName, cuisineType, convertCookTime);
+				MessageBroker.meals.add(meal);
+				MessageBroker.printMeal(meal);
 			}
 			
 		}

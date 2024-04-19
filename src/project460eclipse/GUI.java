@@ -53,7 +53,7 @@ public class GUI extends JFrame implements ActionListener{
 	
 	//other
 	label outputLabel = new label("Output displayed in terminal", 10, 180);
-
+	label noteLabel = new label("If buttons do not immediately appear, wave mouse around window", 10, 200);
 	
 	
 	//constructor, main creates a GUI
@@ -69,6 +69,7 @@ public class GUI extends JFrame implements ActionListener{
 		
 		//labels and textboxes
 		this.add(outputLabel);
+		this.add(noteLabel);
 		
 		//pub side
 		this.add(usernameLabel);
@@ -108,16 +109,105 @@ public class GUI extends JFrame implements ActionListener{
 		this.add(subscribeButton);
 	}
 
-//for button use later
+	//functions
+	public void publish(String username, String cuisine, String mealName, String Tom, String Dom) {
+		System.out.println("The meal is:");
+		System.out.println(username);
+		System.out.println(cuisine);
+		System.out.println(mealName);
+		System.out.println(Tom);
+		System.out.println(Dom);
+	}
+	
+	//code reuse for time and day of meal
+	public boolean keyWordCheck(String toCheck, String[] Valids) {
+		
+		for(int i=0; i < Valids.length; i++) {
+			if(Valids[i].equals(toCheck)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
+//for button use
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		// publish button=================================================================================
 		if(e.getSource()==publishButton) {
-			System.out.println("1");
+			System.out.println();
+			System.out.println("pressed publish.......");
+			System.out.println();
+			
+			//organize inputs
+			String username = usernameBox.getText();
+			String cuisineType = ctBox.getText();
+			String mealName = mealNameBox.getText();
+			String tom = tomBox.getText();
+			String dom = domBox.getText();
+			boolean flag1 = true;
+			boolean flag2 = true;
+			boolean flag3 = true;
+			
+			//perform checks
+			if(username.length() == 0) {
+				System.out.println("please enter a valid username");
+				flag1 = false;
+			}
+			if(cuisineType.length() == 0) {
+				System.out.println("please enter a valid cuisine type");
+				flag1 = false;
+			}
+			if(mealName.length() == 0) {
+				System.out.println("please enter a valid meal name");
+				flag1 = false;
+			}
+			
+			if(tom.length() == 0) {
+				System.out.println("please enter a valid time of meal");
+				flag1 = false;
+			}
+			if(tom.length() > 0) {
+				String[] list = {"breakfast", "Breakfast", "lunch", "Lunch", "dinner", "Dinner"};
+				flag2 = keyWordCheck(tom, list);
+				if(flag2 == false) {
+					System.out.println("please enter a valid time of meal");
+				}
+			}
+			
+			if(dom.length() == 0) {
+				System.out.println("please enter a valid day of meal");
+				flag1 = false;
+			}
+			if(dom.length() > 0) {
+				String[] list = {"sunday", "Sunday", "monday", "Monday", "tuesday", "Tuesday", "wednesday", "Wednesday", "thursday", "Thursday", "friday", "Friday", "saturday", "Saturday"};
+				flag3 = keyWordCheck(dom, list);
+				if(flag3 == false) {
+					System.out.println("please enter a valid day of meal");
+				}
+			}
+			
+
+			
+			//if checks are all good
+			if(flag1 == true && flag2 == true && flag3 == true) {
+				publish(username, cuisineType, mealName, tom, dom);
+			}
+			
 		}
+		
+		// subscribe button=================================================================================
 		if(e.getSource()==subscribeButton) {
 			System.out.println("2");
 		}
 	}
 	
 }
+/*
+Comment Bunker
+
+for textbox check, switch from string == 0 to string.length() == 0
+^because JTextBox is weird
+*/

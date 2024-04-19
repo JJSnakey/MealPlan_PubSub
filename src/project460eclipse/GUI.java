@@ -18,6 +18,7 @@ output box? or maybe nust terminal
 
 allows publisher to publish
 allows subscriber to subscribe or unsubscribe
+=========================================================================================================================
 */
 
 public class GUI extends JFrame implements ActionListener{
@@ -50,13 +51,14 @@ public class GUI extends JFrame implements ActionListener{
 	checkBox weeklyBox = new checkBox(310, 80);
 	
 	JButton subscribeButton;
+	JButton UnsubscribeButton;
 	
 	//other
 	label outputLabel = new label("Output displayed in terminal", 10, 180);
 	label noteLabel = new label("If buttons do not immediately appear, wave mouse around window", 10, 200);
 	
 	
-	//constructor, main creates a GUI
+	//constructor, main creates a GUI======================================================================================
 	GUI(){
 		//window stuff
 		this.setTitle("Joshua Greer's 460 Project");
@@ -107,9 +109,14 @@ public class GUI extends JFrame implements ActionListener{
 		subscribeButton.setBounds(250,130,100,30);
 		subscribeButton.addActionListener(this);
 		this.add(subscribeButton);
+		
+		UnsubscribeButton = new JButton("unsubscribe");
+		UnsubscribeButton.setBounds(400,130,120,30);
+		UnsubscribeButton.addActionListener(this);
+		this.add(UnsubscribeButton);
 	}
 
-	//functions
+	//functions============================================================================================================
 	public void publish(String username, String cuisine, String mealName, String Tom, String Dom) {
 		System.out.println("The meal is:");
 		System.out.println(username);
@@ -119,7 +126,31 @@ public class GUI extends JFrame implements ActionListener{
 		System.out.println(Dom);
 	}
 	
-	//code reuse for time and day of meal
+	public void subscribe(String username, String cuisine, boolean daily) {
+		System.out.println("Subcribed for:");
+		System.out.println(username);
+		System.out.println(cuisine);
+		if(daily) {
+			System.out.println("daily notification");
+		}
+		else {
+			System.out.println("weekly notification");
+		}
+	}
+	
+	public void unsubscribe(String username, String cuisine, boolean daily) {
+		System.out.println("Unsubcribed from:");
+		System.out.println(username);
+		System.out.println(cuisine);
+		if(daily) {
+			System.out.println("daily notification");
+		}
+		else {
+			System.out.println("weekly notification");
+		}
+	}
+	
+	//helper method, check if string matches list of acceptable inputs
 	public boolean keyWordCheck(String toCheck, String[] Valids) {
 		
 		for(int i=0; i < Valids.length; i++) {
@@ -135,7 +166,7 @@ public class GUI extends JFrame implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// publish button=================================================================================
+		// publish button===========================================================================================
 		if(e.getSource()==publishButton) {
 			System.out.println();
 			System.out.println("pressed publish.......");
@@ -189,8 +220,6 @@ public class GUI extends JFrame implements ActionListener{
 				}
 			}
 			
-
-			
 			//if checks are all good
 			if(flag1 == true && flag2 == true && flag3 == true) {
 				publish(username, cuisineType, mealName, tom, dom);
@@ -198,16 +227,84 @@ public class GUI extends JFrame implements ActionListener{
 			
 		}
 		
-		// subscribe button=================================================================================
+		// subscribe button=====================================================================================================
 		if(e.getSource()==subscribeButton) {
-			System.out.println("2");
+			System.out.println();
+			System.out.println("pressed subscribe.......");
+			System.out.println();
+			
+			//organize inputs
+			String username = usernameBox2.getText();
+			String cuisineType = ctoiBox.getText();
+			boolean dayChecked = dailyBox.isSelected();
+			boolean weekChecked = weeklyBox.isSelected();
+			boolean flag1 = true;
+			
+			//perform checks
+			if(username.length() == 0) {
+				System.out.println("please enter a valid username");
+				flag1 = false;
+			}
+			if(cuisineType.length() == 0) {
+				System.out.println("please enter a valid cuisine type");
+				flag1 = false;
+			}
+			if(dayChecked == weekChecked) {
+				System.out.println("please check a single box");
+				flag1 = false;
+			}
+			
+			if(flag1) {
+				subscribe(username, cuisineType, dayChecked);
+			}
+			
 		}
+		
+		// Unsubscribe button=====================================================================================================
+				if(e.getSource()==UnsubscribeButton) {
+					System.out.println();
+					System.out.println("pressed unsubscribe.......");
+					System.out.println();
+					
+					//organize inputs
+					String username = usernameBox2.getText();
+					String cuisineType = ctoiBox.getText();
+					boolean dayChecked = dailyBox.isSelected();
+					boolean weekChecked = weeklyBox.isSelected();
+					boolean flag1 = true;
+					
+					//perform checks
+					if(username.length() == 0) {
+						System.out.println("please enter a valid username");
+						flag1 = false;
+					}
+					if(cuisineType.length() == 0) {
+						System.out.println("please enter a valid cuisine type");
+						flag1 = false;
+					}
+					if(dayChecked == weekChecked) {
+						System.out.println("please check a single box");
+						flag1 = false;
+					}
+					
+					if(flag1) {
+						unsubscribe(username, cuisineType, dayChecked);
+					}
+					
+				}
+		
 	}
 	
 }
-/*
+/*=====================================================================================================================
 Comment Bunker
 
 for textbox check, switch from string == 0 to string.length() == 0
 ^because JTextBox is weird
+
+added helper method for comparing sting to a list of acceptable ones
+
+note that string.equals(string2) is more effective than string == string2
+
+forgot that in if statements you can just say if(flag) rather than if(flag==true)
 */

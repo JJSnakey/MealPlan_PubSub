@@ -45,10 +45,15 @@ public class GUI extends JFrame implements ActionListener{
 
 	textBox usernameBox2 = new textBox(310,0);
 	textBox ctoiBox = new textBox(310,20);
-	textBox dailyBox = new textBox(310,40);
-	textBox weeklyBox = new textBox(310,60);
+	
+	checkBox dailyBox = new checkBox(310, 60);
+	checkBox weeklyBox = new checkBox(310, 80);
 	
 	JButton subscribeButton;
+	
+	//other
+	label outputLabel = new label("Output displayed in terminal", 10, 180);
+
 	
 	
 	//constructor, main creates a GUI
@@ -56,13 +61,14 @@ public class GUI extends JFrame implements ActionListener{
 		//window stuff
 		this.setTitle("Joshua Greer's 460 Project");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setBounds(100,100,720,400);
+		this.setBounds(100,100,600,300);
 		this.setLayout(null);	//necessary for JPanels
 		this.setResizable(false);
-		this.getContentPane().setBackground(new Color(120,120,120));
+		this.getContentPane().setBackground(new Color(140,140,140));
 		this.setVisible(true);
 		
 		//labels and textboxes
+		this.add(outputLabel);
 		
 		//pub side
 		this.add(usernameLabel);
@@ -85,6 +91,7 @@ public class GUI extends JFrame implements ActionListener{
 		
 		this.add(usernameBox2);
 		this.add(ctoiBox);
+		
 		this.add(dailyBox);
 		this.add(weeklyBox);
 
@@ -99,10 +106,6 @@ public class GUI extends JFrame implements ActionListener{
 		subscribeButton.setBounds(250,130,100,30);
 		subscribeButton.addActionListener(this);
 		this.add(subscribeButton);
-		
-		//output
-				
-
 	}
 
 //for button use later

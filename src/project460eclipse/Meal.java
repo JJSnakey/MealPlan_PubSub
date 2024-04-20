@@ -11,6 +11,7 @@ The MessageBroker will have an array of Meal for storage and reference
 
 public class Meal {
 	
+	//attributes
 	String publisherName;
 	boolean daily;			//true if daily, false if weekly
 	String mealName;
@@ -19,7 +20,7 @@ public class Meal {
 	String timeOfMeal;	//optional
 	String dayOfMeal;	//optional
 	
-	//constructor for easy build
+	//constructor for easy build============================================================================================
 	Meal(String pubName, boolean freq, String mealName, String cuisine, int cook, String tom, String dom){
 		this.publisherName = pubName;
 		this.daily = freq;

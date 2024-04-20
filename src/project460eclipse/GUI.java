@@ -296,17 +296,19 @@ public class GUI extends JFrame implements ActionListener{
 				System.out.println("please enter a valid username");
 				flag1 = false;
 			}
-			if(cuisineType.length() == 0) {
-				System.out.println("please enter a valid cuisine type");
+			if(!dayChecked && !weekChecked && cuisineType.length() == 0) {
+				System.out.println("please check a single box or enter a cuisine type");
 				flag1 = false;
 			}
-			if(dayChecked == weekChecked) {
-				System.out.println("please check a single box");
+			if(dayChecked && weekChecked) {
+				System.out.println("please check a single box or no boxes");
 				flag1 = false;
 			}
 			
 			if(flag1) {
-				subscribe(username, cuisineType, dayChecked);
+				Subscriber sub = new Subscriber(username, cuisineType, dayChecked, weekChecked);
+				MessageBroker.subs.add(sub);
+				MessageBroker.printNewSub(sub);
 			}
 			
 		}
@@ -340,6 +342,7 @@ public class GUI extends JFrame implements ActionListener{
 					
 					if(flag1) {
 						unsubscribe(username, cuisineType, dayChecked);
+						
 					}
 					
 				}

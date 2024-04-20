@@ -96,4 +96,34 @@ public class MessageBroker {
 		
 	}
 	
+	// new sub print bb =========================================================================================================================================
+	public static void printNewSub(Subscriber sub) {
+		boolean flag1 = false;	//do we have a cuisine
+		
+		if(sub.cuisineInterest.length() > 0) {
+			flag1 = true;
+		}
+		
+		if(flag1 == false) {
+			if(sub.dayCheck) {
+				System.out.println("subscribe, " + sub.username + ", dailyMeals");
+			}
+			if(sub.weekCheck) {
+				System.out.println("subscribe, " + sub.username + ", weeklyMeals");
+			}
+		}
+		if(flag1 == true) {
+			if(sub.dayCheck) {
+				System.out.println("subscribe, " + sub.username + ", dailyMeals"+ ", " + sub.cuisineInterest);
+			}
+			if(sub.weekCheck) {
+				System.out.println("subscribe, " + sub.username + ", weeklyMeals"+ ", " + sub.cuisineInterest);
+			}
+			if(!sub.dayCheck && !sub.weekCheck) {
+				System.out.println("subscribe, " + sub.username + ", " + sub.cuisineInterest);
+			}
+		}
+		
+	}
+	
 }

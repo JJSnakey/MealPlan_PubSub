@@ -126,4 +126,34 @@ public class MessageBroker {
 		
 	}
 	
+	// unsub print bb =========================================================================================================================================
+		public static void printUnSub(Subscriber sub) {
+			boolean flag1 = false;	//do we have a cuisine
+			
+			if(sub.cuisineInterest.length() > 0) {
+				flag1 = true;
+			}
+			
+			if(flag1 == false) {
+				if(sub.dayCheck) {
+					System.out.println("unsubscribe, " + sub.username + ", dailyMeals");
+				}
+				if(sub.weekCheck) {
+					System.out.println("unsubscribe, " + sub.username + ", weeklyMeals");
+				}
+			}
+			if(flag1 == true) {
+				if(sub.dayCheck) {
+					System.out.println("unsubscribe, " + sub.username + ", dailyMeals"+ ", " + sub.cuisineInterest);
+				}
+				if(sub.weekCheck) {
+					System.out.println("unsubscribe, " + sub.username + ", weeklyMeals"+ ", " + sub.cuisineInterest);
+				}
+				if(!sub.dayCheck && !sub.weekCheck) {
+					System.out.println("unsubscribe, " + sub.username + ", " + sub.cuisineInterest);
+				}
+			}
+			
+		}
+	
 }

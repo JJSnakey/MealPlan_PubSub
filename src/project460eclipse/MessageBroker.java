@@ -44,7 +44,7 @@ public class MessageBroker {
 	
 	
 	//print function bb=================================================================================================
-	public static void printMeal(Meal meal) {
+	public static void printMealPublish(Meal meal) {
 		
 		boolean flag1 = meal.daily;	//daily or weekly
 		boolean flag2 = false;		//do we have tom

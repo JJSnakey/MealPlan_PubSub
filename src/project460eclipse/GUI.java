@@ -218,7 +218,13 @@ public class GUI extends JFrame implements ActionListener{
 				flag1 = false;
 			}
 			if(cookTime.length() > 0) {
-				convertCookTime = Integer.parseInt(cookTime);
+				try {
+					convertCookTime = Integer.parseInt(cookTime);
+				}
+				catch(Exception ed){
+					System.out.println("cook time must be an integer");
+				}
+				
 			}
 			
 			//optional checks
@@ -250,24 +256,24 @@ public class GUI extends JFrame implements ActionListener{
 			if(flag1 == true && flag2 == true && flag3 == true) {
 				Meal meal = new Meal(username, dailyPub, mealName, cuisineType, convertCookTime, tom, dom);
 				MessageBroker.meals.add(meal);
-				MessageBroker.printMeal(meal);
+				MessageBroker.printMealPublish(meal);
 			}
 			//if some optional checks are missing
 			else if(flag1 == true && flag2 == true && flag3 == false) {
 				Meal meal = new Meal(username, dailyPub, mealName, cuisineType, convertCookTime, tom);
 				MessageBroker.meals.add(meal);
-				MessageBroker.printMeal(meal);
+				MessageBroker.printMealPublish(meal);
 				
 			}
 			else if(flag1 == true && flag2 == false && flag3 == true) {
 				Meal meal = new Meal(username, dailyPub, mealName, cuisineType, convertCookTime, dom);
 				MessageBroker.meals.add(meal);
-				MessageBroker.printMeal(meal);
+				MessageBroker.printMealPublish(meal);
 			}
 			else if(flag1 == true && flag2 == false && flag3 == false) {
 				Meal meal = new Meal(username, dailyPub, mealName, cuisineType, convertCookTime);
 				MessageBroker.meals.add(meal);
-				MessageBroker.printMeal(meal);
+				MessageBroker.printMealPublish(meal);
 			}
 			
 		}
@@ -342,14 +348,8 @@ public class GUI extends JFrame implements ActionListener{
 	
 }
 /*=====================================================================================================================
-Comment Bunker
+testing
 
-for textbox check, switch from string == 0 to string.length() == 0
-^because JTextBox is weird
 
-added helper method for comparing sting to a list of acceptable ones
 
-note that string.equals(string2) is more effective than string == string2
-
-forgot that in if statements you can just say if(flag) rather than if(flag==true)
 */

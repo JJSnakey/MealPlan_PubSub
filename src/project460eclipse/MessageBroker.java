@@ -33,8 +33,14 @@ public class MessageBroker {
 		
 	}
 	//remove sub
-	public void detachSubscriber() {
-		
+	public static boolean detachSubscriber(String username1) {
+		for(int i = 0; i<subs.size(); i++) {
+			if(subs.get(i).username.equals(username1)) {
+				subs.remove(i);
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	//function to notify subscribers--------------------------------------------------------
@@ -127,30 +133,30 @@ public class MessageBroker {
 	}
 	
 	// unsub print bb =========================================================================================================================================
-		public static void printUnSub(Subscriber sub) {
+		public static void printUnSub(String username, String cuisineType, boolean dayCheck, boolean weekCheck) {
 			boolean flag1 = false;	//do we have a cuisine
 			
-			if(sub.cuisineInterest.length() > 0) {
+			if(cuisineType.length() > 0) {
 				flag1 = true;
 			}
 			
 			if(flag1 == false) {
-				if(sub.dayCheck) {
-					System.out.println("unsubscribe, " + sub.username + ", dailyMeals");
+				if(dayCheck) {
+					System.out.println("unsubscribe, " + username + ", dailyMeals");
 				}
-				if(sub.weekCheck) {
-					System.out.println("unsubscribe, " + sub.username + ", weeklyMeals");
+				if(weekCheck) {
+					System.out.println("unsubscribe, " + username + ", weeklyMeals");
 				}
 			}
 			if(flag1 == true) {
-				if(sub.dayCheck) {
-					System.out.println("unsubscribe, " + sub.username + ", dailyMeals"+ ", " + sub.cuisineInterest);
+				if(dayCheck) {
+					System.out.println("unsubscribe, " + username + ", dailyMeals"+ ", " + cuisineType);
 				}
-				if(sub.weekCheck) {
-					System.out.println("unsubscribe, " + sub.username + ", weeklyMeals"+ ", " + sub.cuisineInterest);
+				if(weekCheck) {
+					System.out.println("unsubscribe, " + username + ", weeklyMeals"+ ", " + cuisineType);
 				}
-				if(!sub.dayCheck && !sub.weekCheck) {
-					System.out.println("unsubscribe, " + sub.username + ", " + sub.cuisineInterest);
+				if(!dayCheck && !weekCheck) {
+					System.out.println("unsubscribe, " + username + ", " + cuisineType);
 				}
 			}
 			

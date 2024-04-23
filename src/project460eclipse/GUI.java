@@ -14,10 +14,10 @@ User interface to interact with Message Broker
 has textboxes for input
 has buttons for functions
 
-output box? or maybe nust terminal
-
 allows publisher to publish
 allows subscriber to subscribe or unsubscribe
+
+Testing info at bottom!!
 =========================================================================================================================
 */
 
@@ -177,9 +177,9 @@ public class GUI extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// publish button===========================================================================================
 		if(e.getSource()==publishButton) {
-			System.out.println();
-			System.out.println("pressed publish.......");
-			System.out.println();
+//			System.out.println();
+//			System.out.println("pressed publish.......");
+//			System.out.println();
 			
 			//organize inputs
 			String username = usernameBox.getText();
@@ -280,9 +280,9 @@ public class GUI extends JFrame implements ActionListener{
 		
 		// subscribe button=====================================================================================================
 		if(e.getSource()==subscribeButton) {
-			System.out.println();
-			System.out.println("pressed subscribe.......");
-			System.out.println();
+//			System.out.println();
+//			System.out.println("pressed subscribe.......");
+//			System.out.println();
 			
 			//organize inputs
 			String username = usernameBox2.getText();
@@ -315,16 +315,19 @@ public class GUI extends JFrame implements ActionListener{
 		
 		// Unsubscribe button=====================================================================================================
 		if(e.getSource()==UnsubscribeButton) {
-			System.out.println();
-			System.out.println("pressed unsubscribe.......");
-			System.out.println();
+			//for testing
+//			System.out.println();
+//			System.out.println("pressed unsubscribe.......");
+//			System.out.println();
 			
 			//organize inputs
 			String username = usernameBox2.getText();
 			String cuisineType = ctoiBox.getText();
 			boolean dayChecked = dailyBox.isSelected();
 			boolean weekChecked = weeklyBox.isSelected();
+
 			boolean flag1 = true;
+			boolean flag2 = false;
 			
 			//perform checks
 			if(username.length() == 0) {
@@ -341,9 +344,14 @@ public class GUI extends JFrame implements ActionListener{
 			}
 			
 			if(flag1) {
-				Subscriber sub = new Subscriber(username, cuisineType, dayChecked, weekChecked);
-				MessageBroker.subs.add(sub);
-				MessageBroker.printUnSub(sub);
+				flag2 = MessageBroker.detachSubscriber(username);
+				if(flag2) {//found and deleted subscriber
+					MessageBroker.printUnSub(username, cuisineType, dayChecked, weekChecked);
+				}
+				if(!flag2) {//did not find
+					//System.out.println("No currently subscribed user that meets this description:");
+					MessageBroker.printUnSub(username, cuisineType, dayChecked, weekChecked);
+				}
 			}
 			
 		}
@@ -354,6 +362,11 @@ public class GUI extends JFrame implements ActionListener{
 /*=====================================================================================================================
 testing
 
+output printed to terminal
+output based off of page 2 of project description
 
+I have implemented error messages into the code in there are incorrect publishes
+I have commented out the terminal print statement for when you press a button
+I have commented out the error message for when you click unsubscribe but that user doesnt exist
 
 */
